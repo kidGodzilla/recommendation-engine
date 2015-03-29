@@ -11,7 +11,10 @@
         /**
          * Poll (1s interval) until we have a facebook access token,
          * Then get a list of movies our user has liked on facebook
+         * (Added debouncing because callback time can exceed 1s)
          */
+        var debouncing = false;
+
         fbq = setInterval(function () {
 
             var token = recommendations.get('accessToken');
@@ -21,13 +24,18 @@
                     access_token: token
                 }, function(response) {
 
-                    Messenger().post("Retrieving updated movie likes from Facebook...");
+                    if (!debouncing) {
+                        debouncing = true;
 
-                    recommendations.getMovies(response.movies);
+                        Messenger().post("Retrieving updated movie likes from Facebook...");
 
-                    Messenger().post("Success!");
+                        recommendations.getMovies(response.movies);
 
-                    clearInterval(fbq);
+                        Messenger().post("Success!");
+
+                        clearInterval(fbq);
+                    }
+
                 });
             }
 

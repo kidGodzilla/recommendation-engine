@@ -8,15 +8,18 @@
 
         var firebaseRef = new Firebase("https://movierecommendations.firebaseio.com");
 
-        firebaseRef.child('affinity/' + uid + '/' + user).update({
-            count: count,
-            movies: movies
-        });
+        if (uid && user) {
+            firebaseRef.child('affinity/' + uid + '/' + user).update({
+                count: count,
+                movies: movies
+            });
 
-        // The inverse is also true
-        firebaseRef.child('affinity/' + user + '/' + uid).update({
-            count: count,
-            movies: myMovies
-        });
+            // The inverse is also true
+            firebaseRef.child('affinity/' + user + '/' + uid).update({
+                count: count,
+                movies: myMovies
+            });
+        }
+
     });
 })();
