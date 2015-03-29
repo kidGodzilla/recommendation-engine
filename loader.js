@@ -26,6 +26,7 @@
     loadStylesheet("vex-theme-default.css");
     loadStylesheet("//cdnjs.cloudflare.com/ajax/libs/messenger/1.4.0/css/messenger.css");
     loadStylesheet("//cdnjs.cloudflare.com/ajax/libs/messenger/1.4.0/css/messenger-theme-air.css");
+    loadStylesheet("//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.4/yeti/bootstrap.min.css");
 
     // JS Dependencies
     loadScript("//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js");

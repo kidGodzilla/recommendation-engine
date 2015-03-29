@@ -3,12 +3,6 @@
 
     $(document).ready(function () {
         /**
-         * Authenticate the firebase with facebook
-         */
-        recommendations.authWithFacebook();
-
-
-        /**
          * Poll (250ms interval) until we have a facebook access token,
          * Then get a list of movies our user has liked on facebook
          * (Added debouncing because callback time can exceed 1s)
@@ -30,10 +24,6 @@
                         Messenger().post("Retrieving updated movie likes from Facebook...");
 
                         recommendations.getMovies(response.movies);
-
-                        Messenger().post("Success!");
-
-                        Messenger().post("Computing user affinity...");
 
                         clearInterval(fbq);
                     }
@@ -60,8 +50,6 @@
         // We need to update our values periodically, as this array will grow over time
         setInterval(function () {
 
-            Messenger().post("Displaying Results...");
-
             /**
              * Get recommendations
              */
@@ -73,7 +61,7 @@
             /**
              * Display our recommendations
              */
-            var body = "<ol>";
+            var body = "";
             var movies = recommendations.recommendations;
 
             for (var i = 0; i < movies.length && i < 10; i++) {
@@ -97,9 +85,13 @@
                 }
             }
 
-            body += "</ol>";
+            if (body === "") {
+                body = "<h1 class=\"text-center\">Computing...</h1>";
+            } else {
+                body = "<h1>Your Recommendations</h1><ol>" + body + "</ol>";
+            }
 
-            $('body').html(body);
+            $('#body').html(body);
 
         }, 5000);
 

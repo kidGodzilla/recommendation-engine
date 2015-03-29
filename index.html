@@ -6,7 +6,56 @@
     <script src="loader.js"></script>
 </head>
 <body>
-    <h1>A Client-Side Recommendation Engine</h1>
-    <p>Log in with Facebook to get movie recommendations</p>
+<div class="container">
+    <div class="header clearfix">
+        <div id="navigation-component">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+        <h3 class="text-muted">Movie Recommendations</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="body" class="well">
+                <div id="jumbotron-component">
+                    <div class="jumbotron">
+                        <h1>Get Movie Recommendations</h1>
+                        <p class="lead">Log in with Facebook to get movie recommendations, computed using client-side JavaScript.</p>
+                        <p><a class="btn btn-lg btn-info" href="#" onclick="recommendations.authWithFacebook()" role="button">Login with Facebook</a></p>
+                    </div>
+                </div>
+
+                <div class="row marketing">
+                <div class="col-lg-6">
+                <h4>Client-Side JavaScript</h4>
+                <p>Everything is being computed in client-side JavaScript.</p>
+
+                <h4>Facebook Connect</h4>
+                <p>Uses Facebook connect to load a list of movies you've liked on Facebook.</p>
+                </div>
+
+                <div class="col-lg-6">
+                <h4>Firebase</h4>
+                <p>Login is secured by firebase as well as data persistence.</p>
+
+                <h4>Now with bootstrap</h4>
+                <p>Slightly easier on the eyes, now with 100% more bootstrap.css.</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <br/><br/>
+        <p>© James Futhey 2015. All Rights Reserved.</p>
+    </footer>
+
+</div> <!-- /container -->
 </body>
 </html>
