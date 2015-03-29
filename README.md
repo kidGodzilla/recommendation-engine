@@ -12,7 +12,7 @@ This is only my second recommendation engine and I threw it together rather quic
 
 ## Does it work?
 
-Yes, to some extent. Probably doesn't scale well.
+Yes, to some extent, although it probably doesn't scale well.
 
 # Demo
 
