@@ -1,6 +1,6 @@
 # Recommendation-engine
 
-This is a *client-side computed recommendation-engine* based on user affinity, written in JavaScript, using **Firebase** for persistence.
+This is a *client-side-computed recommendation-engine* based on user affinity, written in JavaScript, using **Firebase** for persistence.
 
 It uses **Facebook Login** to gather information about a user's favorite movies and then provides recommendations on other movies the user might like by randomly recommending other movies similar users liked.
 
