@@ -21,10 +21,20 @@
         head.appendChild(link);
     }
 
+    // Stylesheets
+    loadStylesheet("vex.css");
+    loadStylesheet("vex-theme-default.css");
+    loadStylesheet("//cdnjs.cloudflare.com/ajax/libs/messenger/1.4.0/css/messenger.css");
+    loadStylesheet("//cdnjs.cloudflare.com/ajax/libs/messenger/1.4.0/css/messenger-theme-air.css");
+
     // JS Dependencies
     loadScript("//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js");
-    loadScript("//cdn.firebase.com/js/client/2.2.1/firebase.js");
+    loadScript("//cdn.firebase.com/js/client/2.2.3/firebase.js");
     loadScript("//cdn.jsdelivr.net/lodash/3.5.0/lodash.compat.min.js");
+    loadScript("vex.combined.min.js");
+    loadScript("//cdnjs.cloudflare.com/ajax/libs/messenger/1.4.0/js/messenger.min.js");
+
+    document.write("<script>vex.defaultOptions.className = 'vex-theme-default'; Messenger.options = { extraClasses: 'messenger-fixed messenger-on-top messenger-on-right', theme: 'air'};</script>");
 
     // Main JS
     loadScript("fb.js");
@@ -34,7 +44,11 @@
 
     // Recommendation Engine
     loadScript("auth.js");
+    loadScript("getMovies.js");
     loadScript("likeMovie.js");
+
+    // Run App
+    loadScript("app.js");
 
 
 })();
