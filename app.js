@@ -71,16 +71,33 @@
 
                     var movieData = recommendations.movies[movie];
 
+                    var inc = i + 1;
+                    var ol = "<div class='hidden-xs hidden-sm col-md-1 text-right'><h3>" + inc + ".</h3></div>";
+
+                    console.log(movieData);
+
+                    var pic;
+
+                    if (movieData.photos) {
+                        var pics = movieData.photos[0].images;
+                        pic = pics.slice(-1)[0].source;
+                    } else {
+                        pic = "placeholder.png";
+                    }
+
+                    var photo = "<div class='col-xs-12 col-sm-6 col-md-3 text-center' style='background: #fff;border-top: 10px solid #fafafa;border-bottom:10px solid #fafafa'><img src='" + pic + "' style='height: 114px;border: 5px solid #fff;margin: 0 auto; max-width: 140px'></div>";
                     var name = movieData.name ? "<h3>" + movieData.name +"</h3>" : "";
                     var about = movieData.about ? "<p>" + movieData.about + "</p>" : "";
                     var plot = movieData.plot ? "<p>" + movieData.plot + "</p>" : "";
 
-                    body += "<li>" + name + about + plot + "</li>";
+                    var item = ol + photo + "<div class='col-xs-12 col-sm-6 col-md-8'>" + name + about + plot + "</div>";
+
+                    body += "<div class='row'>" + item + "</div>";
 
                 } else {
 
                     ref.child("movies/" + movie).on("value", function(snapshot) {
-                        recommendations.movies[movie] = snapshot.val();;
+                        recommendations.movies[movie] = snapshot.val();
                     });
                 }
             }
@@ -88,7 +105,7 @@
             if (body === "") {
                 body = "<h1 class=\"text-center\">Computing...</h1>";
             } else {
-                body = "<h1>Your Recommendations</h1><ol>" + body + "</ol>";
+                body = "<h1>Your Recommendations</h1>" + body + "";
                 $('.marketing').hide();
             }
 
