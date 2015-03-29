@@ -24,6 +24,9 @@
                     Messenger().post("Retrieving updated movie likes from Facebook");
 
                     recommendations.getMovies(response.movies);
+
+                    Messenger().post("Success!");
+
                     clearInterval(fbq);
                 });
             }

@@ -48,7 +48,5 @@
             });
         }
 
-        Messenger().post("Success!");
-
     });
 })();
