@@ -4,6 +4,8 @@ This is a client-side computed recommendation-engine based on user affinity, wri
 
 It uses Facebook connect to gather information about a user's favorite movies and provide recommendations on other movies the user might like.
 
+The look and feel has been improved by using **Twitter Bootstrap** & Hubspot's **Messenger.js**.
+
 ## What?
 
 Yes, it's kind of bizarre to write a recommendation engine in client-side JavaScript.
