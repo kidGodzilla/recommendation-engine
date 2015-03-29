@@ -80,15 +80,17 @@
                 var movie = movies[i];
 
                 if(recommendations.movies[movie]) {
+
                     var movieData = recommendations.movies[movie];
 
                     var name = movieData.name ? "<h3>" + movieData.name +"</h3>" : "";
                     var about = movieData.about ? "<p>" + movieData.about + "</p>" : "";
                     var plot = movieData.plot ? "<p>" + movieData.plot + "</p>" : "";
 
-                    var template = "<li>" + name + about + plot + "</li>";
-                    body += template;
+                    body += "<li>" + name + about + plot + "</li>";
+
                 } else {
+
                     ref.child("movies/" + movie).on("value", function(snapshot) {
                         recommendations.movies[movie] = snapshot.val();;
                     });
