@@ -1,3 +1,5 @@
+"use strict";
+
 (function() {
     function loadScriptAsync(resource) {
         var sNew = document.createElement("script");
@@ -48,9 +50,9 @@
     loadScript("getMovies.js");
     loadScript("computeAffinity.js");
     loadScript("getRecommendations.js");
+    // loadScript("renderRecommendations.js");
 
     // Run App
     loadScript("app.js");
-
 
 })();

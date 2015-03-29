@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
     recommendations.registerGlobal('computeAffinity', function (user, movies) {
         var uid = recommendations.get('uid');

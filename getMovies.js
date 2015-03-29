@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
     recommendations.registerGlobal('myMovies', []);
     recommendations.registerGlobal('movies', {});

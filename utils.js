@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
     /**
      * Generate a (globally) Unique ID

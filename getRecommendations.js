@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
     recommendations.registerGlobal('getRecommendations', function () {
         var uid = recommendations.get('uid');

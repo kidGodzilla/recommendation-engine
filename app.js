@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
     var fbq;
 
@@ -49,14 +51,13 @@
 
         // We need to update our values periodically, as this array will grow over time
         setInterval(function () {
-
             /**
              * Get recommendations
              */
             recommendations.getRecommendations();
 
             recommendations.recommendations = recommendations.uniq(recommendations.recommendations);
-            // recommendations.recommendations = recommendations.shuffle(recommendations.recommendations); // For testing
+            // recommendations.recommendations = recommendations.shuffle(recommendations.recommendations); // For testing styles
 
             /**
              * Display our recommendations
@@ -64,13 +65,17 @@
             var body = "";
             var movies = recommendations.recommendations;
 
-            for (var i = 0; i < movies.length && i < 10; i++) {
+            // Limits to the first 14 or fewer recommendations
+            for (var i = 0; i < movies.length && i < 14; i++) {
                 var movie = movies[i];
 
                 if(recommendations.movies[movie]) {
 
                     var movieData = recommendations.movies[movie];
 
+                    /**
+                     * Builds the item
+                     */
                     var inc = i + 1;
                     var ol = "<div class='hidden-xs hidden-sm col-md-1 text-right'><h1>" + inc + ".</h1></div>";
 
@@ -99,12 +104,19 @@
 
                 } else {
 
+                    /**
+                     * Sometimes we don't have a specific movie in our local cache. Instead of
+                     * delaying the render we wait until next render to check if the promise has resolved
+                     */
                     ref.child("movies/" + movie).on("value", function(snapshot) {
                         recommendations.movies[movie] = snapshot.val();
                     });
                 }
             }
 
+            /**
+             * Toggles between loading state and rendered state
+             */
             if (body === "") {
                 body = "<h1 class=\"text-center\">Computing...</h1>";
             } else {
@@ -113,8 +125,7 @@
             }
 
             $('#body').html(body);
-
-        }, 5000);
+        }, 2500);
 
     });
 })();
