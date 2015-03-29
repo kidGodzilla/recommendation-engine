@@ -64,18 +64,30 @@
             recommendations.getRecommendations();
 
             recommendations.recommendations = recommendations.uniq(recommendations.recommendations);
-            recommendations.recommendations = recommendations.shuffle(recommendations.recommendations);
+            // recommendations.recommendations = recommendations.shuffle(recommendations.recommendations);
 
             /**
              * Display our recommendations
              */
-            var body = "";
+            var body = "<ol>";
             var movies = recommendations.recommendations;
 
-            for (var i = 0; i < movies.length; i++) {
-                var template = "<p><h3>" + movies[i] +"</h3></p>";
-                body += template;
+            for (var i = 0; i < movies.length && i < 10; i++) {
+                var movie = movies[i];
+
+                if(recommendations.movies[movie]) {
+                    var movieData = recommendations.movies[movie];
+
+                    var template = "<li><h3>" + movieData.name +"</h3></li>";
+                    body += template;
+                } else {
+                    ref.child("movies/" + movie).on("value", function(snapshot) {
+                        recommendations.movies[movie] = snapshot.val();;
+                    });
+                }
             }
+
+            body += "</ol>";
 
             $('body').html(body);
 
