@@ -89,6 +89,7 @@
                 body = "<h1 class=\"text-center\">Computing...</h1>";
             } else {
                 body = "<h1>Your Recommendations</h1><ol>" + body + "</ol>";
+                $('.marketing').hide();
             }
 
             $('#body').html(body);
