@@ -17,11 +17,11 @@
             var token = recommendations.get('accessToken');
             if (token) {
                 FB.api('/me', {
-                    fields: 'id,movies,friends{id,name,picture}',
+                    fields: 'id,movies{about,plot_outline,photos,name},friends{id,name,picture}',
                     access_token: token
                 }, function(response) {
 
-                    Messenger().post("Retrieving updated movie likes from Facebook");
+                    Messenger().post("Retrieving updated movie likes from Facebook...");
 
                     recommendations.getMovies(response.movies);
 
@@ -34,9 +34,16 @@
         }, 1000);
 
         /**
-         *
+         * Start computing user affinity
          */
+        var ref = new Firebase("https://movierecommendations.firebaseio.com");
 
+        ref.child("users").on("value", function(snapshot) {
+            var user = snapshot.val();
+            for (var key in user) {
+                recommendations.computeAffinity(key, user[key].movies);
+            }
+        });
 
 
     });

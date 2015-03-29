@@ -5,6 +5,8 @@
     recommendations.registerGlobal('getMovies', function (obj) {
         if (!obj) return false;
 
+        console.log(obj);
+
         var firebaseRef = new Firebase("https://movierecommendations.firebaseio.com");
 
         if (obj && obj.data) {
@@ -15,9 +17,17 @@
                 recommendations.movies[movie.id] = {};
                 recommendations.movies[movie.id].name = movie.name;
 
+                var plot = movie.plot_outline || false;
+                var about = movie.about || false;
+                var photos = movie.photos || false;
+
                 // Insert movie title into master movie object in firebase
                 firebaseRef.child('movies/' + movie.id).update({
-                    name: movie.name
+                    name: movie.name,
+                    about: about,
+                    plot: plot,
+                    photos: photos
+
                 });
 
                 // Append movie to my movies

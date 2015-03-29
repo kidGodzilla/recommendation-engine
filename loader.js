@@ -45,7 +45,7 @@
     // Recommendation Engine
     loadScript("auth.js");
     loadScript("getMovies.js");
-    loadScript("likeMovie.js");
+    loadScript("computeAffinity.js");
 
     // Run App
     loadScript("app.js");
