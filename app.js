@@ -56,7 +56,7 @@
             recommendations.getRecommendations();
 
             recommendations.recommendations = recommendations.uniq(recommendations.recommendations);
-            // recommendations.recommendations = recommendations.shuffle(recommendations.recommendations);
+            // recommendations.recommendations = recommendations.shuffle(recommendations.recommendations); // For testing
 
             /**
              * Display our recommendations
@@ -72,9 +72,7 @@
                     var movieData = recommendations.movies[movie];
 
                     var inc = i + 1;
-                    var ol = "<div class='hidden-xs hidden-sm col-md-1 text-right'><h3>" + inc + ".</h3></div>";
-
-                    console.log(movieData);
+                    var ol = "<div class='hidden-xs hidden-sm col-md-1 text-right'><h1>" + inc + ".</h1></div>";
 
                     var pic;
 
@@ -85,14 +83,19 @@
                         pic = "placeholder.png";
                     }
 
-                    var photo = "<div class='col-xs-12 col-sm-6 col-md-3 text-center' style='background: #fff;border-top: 10px solid #fafafa;border-bottom:10px solid #fafafa'><img src='" + pic + "' style='height: 114px;border: 5px solid #fff;margin: 0 auto; max-width: 140px'></div>";
+                    var photo = "<div class='col-xs-12 col-sm-6 col-md-2 text-center image-section'><img src='" + pic + "'></div>";
                     var name = movieData.name ? "<h3>" + movieData.name +"</h3>" : "";
                     var about = movieData.about ? "<p>" + movieData.about + "</p>" : "";
                     var plot = movieData.plot ? "<p>" + movieData.plot + "</p>" : "";
 
-                    var item = ol + photo + "<div class='col-xs-12 col-sm-6 col-md-8'>" + name + about + plot + "</div>";
+                    var afterThought = "<div class='hidden-xs hidden-sm col-md-1'>&nbsp;</div>";
 
-                    body += "<div class='row'>" + item + "</div>";
+                    var item = ol + photo + "<div class='col-xs-12 col-sm-6 col-md-8'>" + name + about + plot + "</div>" + afterThought;
+
+                    var altBg = "";
+                    if (inc%2) altBg = " alt-bg";
+
+                    body += "<div class='row b-top" + altBg+ "'><div><div class='row'>" + item + "</div></div></div>";
 
                 } else {
 
@@ -105,7 +108,7 @@
             if (body === "") {
                 body = "<h1 class=\"text-center\">Computing...</h1>";
             } else {
-                body = "<h1>Your Recommendations</h1>" + body + "";
+                body = "<h1 class='title'>Your Recommendations</h1>" + body + "";
                 $('.marketing').hide();
             }
 
