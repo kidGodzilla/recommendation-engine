@@ -1,4 +1,4 @@
-# recommendation-engine
+# Recommendation-engine
 
 This is a client-side computed recommendation-engine based on user affinity, written in JavaScript, using firebase as a datastore.
 
