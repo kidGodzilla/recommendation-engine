@@ -6,7 +6,7 @@
         firebaseRef.on("value", function(snapshot) { //.orderByChild("count").limitToLast(5)
             var val = snapshot.val();
 
-            for (var key in val) {
+            for (var guy in val) {
                 if (guy && guy.movies) {
                     for (var i = 0; i < guy.movies.length; i++)
                         recommendations.recommendations.push(guy.movies[i]);
