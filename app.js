@@ -33,6 +33,8 @@
 
                         Messenger().post("Success!");
 
+                        Messenger().post("Computing user affinity...");
+
                         clearInterval(fbq);
                     }
 
@@ -58,6 +60,8 @@
         // We need to update our values periodically, as this array will grow over time
         setInterval(function () {
 
+            Messenger().post("Displaying Results...");
+
             /**
              * Get recommendations
              */
@@ -78,7 +82,11 @@
                 if(recommendations.movies[movie]) {
                     var movieData = recommendations.movies[movie];
 
-                    var template = "<li><h3>" + movieData.name +"</h3></li>";
+                    var name = movieData.name ? "<h3>" + movieData.name +"</h3>" : "";
+                    var about = movieData.about ? "<p>" + movieData.about + "</p>" : "";
+                    var plot = movieData.plot ? "<p>" + movieData.plot + "</p>" : "";
+
+                    var template = "<li>" + name + about + plot + "</li>";
                     body += template;
                 } else {
                     ref.child("movies/" + movie).on("value", function(snapshot) {
