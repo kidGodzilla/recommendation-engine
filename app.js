@@ -20,6 +20,9 @@
                     fields: 'id,movies,friends{id,name,picture}',
                     access_token: token
                 }, function(response) {
+
+                    Messenger().post("Retrieving updated movie likes from Facebook");
+
                     recommendations.getMovies(response.movies);
                     clearInterval(fbq);
                 });

@@ -6,8 +6,15 @@
 
         ref.authWithOAuthPopup("facebook", function(error, authData) {
             if (error) {
+                Messenger().post({
+                    message: "Login Failed. " + error,
+                    type: 'error',
+                    showCloseButton: true
+                });
                 console.log("Login Failed!", error);
             } else {
+
+                Messenger().post("Logged in successfully");
 
                 // Cache the facebook access token
                 if (authData && authData.facebook && authData.facebook.accessToken)
