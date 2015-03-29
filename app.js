@@ -9,7 +9,7 @@
 
 
         /**
-         * Poll (1s interval) until we have a facebook access token,
+         * Poll (250ms interval) until we have a facebook access token,
          * Then get a list of movies our user has liked on facebook
          * (Added debouncing because callback time can exceed 1s)
          */
@@ -39,7 +39,7 @@
                 });
             }
 
-        }, 1000);
+        }, 250);
 
         /**
          * Start computing user affinity
@@ -53,6 +53,33 @@
             }
         });
 
+        recommendations.registerGlobal('recommendations', []);
+
+        // We need to update our values periodically, as this array will grow over time
+        setInterval(function () {
+
+            /**
+             * Get recommendations
+             */
+            recommendations.getRecommendations();
+
+            recommendations.recommendations = recommendations.uniq(recommendations.recommendations);
+            recommendations.recommendations = recommendations.shuffle(recommendations.recommendations);
+
+            /**
+             * Display our recommendations
+             */
+            var body = "";
+            var movies = recommendations.recommendations;
+
+            for (var i = 0; i < movies.length; i++) {
+                var template = "<p><h3>" + movies[i] +"</h3></p>";
+                body += template;
+            }
+
+            $('body').html(body);
+
+        }, 5000);
 
     });
 })();

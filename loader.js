@@ -46,6 +46,7 @@
     loadScript("auth.js");
     loadScript("getMovies.js");
     loadScript("computeAffinity.js");
+    loadScript("getRecommendations.js");
 
     // Run App
     loadScript("app.js");
