@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendations</title>
+    <script src="loader.js"></script>
+</head>
+<body>
+
+<script>
+    $(document).ready(function () {
+        recommendations.authWithFacebook();
+        recommendations.registerGlobal('myMovies', []);
+        recommendations.registerGlobal('movies', {});
+
+        recommendations.registerGlobal('getMovies', function (obj) {
+            if (!obj) return false;
+
+            if (obj && obj.paging.next) {
+                $.ajax({
+                    dataType: "json",
+                    url: obj.paging.next,
+                    success: function (data) {
+                        if (data) recommendations.getMovies(data);
+                    }
+                });
+            }
+
+            if (obj && obj.data) {
+                for (var i = 0; i < obj.data.length; i++) {
+                    var movie = obj.data[i];
+
+                    // Insert movie title into local cache
+                    recommendations.movies[movie.id] = {};
+                    recommendations.movies[movie.id].name = movie.name;
+
+                    // Insert movie title into movie object in firebase
+                    var firebaseRef = recommendations.get('firebaseRef');
+
+                    if (!firebaseRef.child('/movies/' + movie.id).exists()) {
+                        firebaseRef.child('/movies/' + movie.id).set({
+                            name: movie.name
+                        });
+                    }
+
+                    // Append movie to my movies
+                    if (recommendations.myMovies.indexOf(movie.id) === -1)
+                        recommendations.myMovies.push(movie.id);
+                    
+                }
+            }
+        });
+
+        var fbq = setInterval(function () {
+
+            var token = recommendations.get('accessToken');
+            if (token) {
+                console.log(token);
+                FB.api('/me', {
+                    fields: 'id,movies,friends{id,name,picture}',
+                    access_token: token
+                }, function(response) {
+                    console.log(response);
+
+                    recommendations.getMovies(response.movies);
+
+                    clearInterval(fbq);
+                });
+            }
+
+        }, 500);
+    });
+</script>
+</body>
+</html>

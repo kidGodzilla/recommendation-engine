@@ -18,8 +18,8 @@ var Core = (function () {
     /**
      * Prevent direct execution
      */
-    if (!(this instanceof CoreObject))
-        needsNew();
+    //if (!(this instanceof Core))
+    //    needsNew();
 
     /**
      * datastore getter
