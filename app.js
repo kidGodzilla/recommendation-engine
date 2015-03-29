@@ -1,7 +1,7 @@
 "use strict";
 
 (function () {
-    var fbq;
+    var fbq, rend;
 
     $(document).ready(function () {
         /**
@@ -50,7 +50,7 @@
         recommendations.registerGlobal('recommendations', []);
 
         // We need to update our values periodically, as this array will grow over time
-        setInterval(function () {
+        var rend = setInterval(function () {
             /**
              * Get recommendations
              */
@@ -63,10 +63,11 @@
              * Display our recommendations
              */
             var body = "";
+            var totalRecommendations = 14;
             var movies = recommendations.recommendations;
 
             // Limits to the first 14 or fewer recommendations
-            for (var i = 0; i < movies.length && i < 14; i++) {
+            for (var i = 0; i < movies.length && i < totalRecommendations; i++) {
                 var movie = movies[i];
 
                 if(recommendations.movies[movie]) {
@@ -112,6 +113,12 @@
                         recommendations.movies[movie] = snapshot.val();
                     });
                 }
+
+                /**
+                 * Clear our render interval if we reach the desired number of recommendations &
+                 * Ensure we STOP THE MADNESS!
+                 */
+                if (inc === totalRecommendations) clearInterval(rend);
             }
 
             /**
