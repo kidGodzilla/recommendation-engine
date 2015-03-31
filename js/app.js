@@ -63,7 +63,7 @@
              * Display our recommendations
              */
             var body = "";
-            var totalRecommendations = 14;
+            var totalRecommendations = 25;
             var movies = recommendations.recommendations;
 
             // Limits to the first 14 or fewer recommendations
@@ -86,7 +86,7 @@
                         var pics = movieData.photos[0].images;
                         pic = pics.slice(-1)[0].source;
                     } else {
-                        pic = "placeholder.png";
+                        pic = "images/placeholder.png";
                     }
 
                     var photo = "<div class='col-xs-12 col-sm-6 col-md-2 text-center image-section'><img src='" + pic + "'></div>";
